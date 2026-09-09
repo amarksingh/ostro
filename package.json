@@ -1,12 +1,18 @@
 {
   "name": "@ostro/ostro",
   "version": "1.3.4",
-  "description" : "OstroJS MVC framework for NodeJS",
-  "keywords": ["framework", "ostrojs", "mvc", "MVC framework", "nodejs framework"],
+  "description": "OstroJS MVC framework for NodeJS",
+  "keywords": [
+    "framework",
+    "ostrojs",
+    "mvc",
+    "MVC framework",
+    "nodejs framework"
+  ],
   "author": "amar",
   "license": "MIT",
   "scripts": {
-    "test": "NODE_PATH=../foundation/node_modules npx jest",
+    "test": "npx c8 npx jest",
     "dev": "npm run development",
     "development": "mix",
     "watch": "mix watch",
