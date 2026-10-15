@@ -1,6 +1,9 @@
 const route = require('@ostro/support/facades/route')
 const ServiceProvider = require('@ostro/foundation/providers/routeServiceProvider')
 const WebRoutes = require('~/routes/web')
+/**
+ * Class RouteServiceProvider.
+ */
 class RouteServiceProvider extends ServiceProvider {
     
     /**
@@ -32,12 +35,20 @@ class RouteServiceProvider extends ServiceProvider {
         this.mapWebRoutes()
     }
 
+    /**
+     * mapApiRoutes method.
+     * @returns {any}
+     */
     mapApiRoutes() {
         route.prefix('api')
             .namespace(this.$namespace)
             .group(base_path('routes/api'))
     }
     
+    /**
+     * mapWebRoutes method.
+     * @returns {any}
+     */
     mapWebRoutes() {
         route.middleware('web')
             .namespace(this.$namespace)

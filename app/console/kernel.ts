@@ -1,4 +1,7 @@
 const ConsoleKernel = require('@ostro/foundation/console/kernel')
+/**
+ * Class Kernel.
+ */
 class Kernel extends ConsoleKernel{
 
 	$commands = {};

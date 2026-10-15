@@ -1,5 +1,8 @@
 const Authenticatable = require('@ostro/foundation/auth/user')
 
+/**
+ * Class User.
+ */
 class User extends Authenticatable {
 
     $fillable = [

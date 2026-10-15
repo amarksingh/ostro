@@ -1,5 +1,8 @@
 const ExceptionHandler = require('@ostro/foundation/exception/handler');
 
+/**
+ * Class Handler.
+ */
 class Handler extends ExceptionHandler {
 
     $dontReport = [

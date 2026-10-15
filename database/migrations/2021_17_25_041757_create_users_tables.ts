@@ -1,6 +1,9 @@
 const Schema = require('@ostro/support/facades/schema');
 const Migration = require('@ostro/database/migration');
 
+/**
+ * Class CreateUsersTables.
+ */
 class CreateUsersTables extends Migration {
 
     

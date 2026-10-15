@@ -1,4 +1,7 @@
 const HttpKernel = require('@ostro/foundation/http/kernel')
+/**
+ * Class Kernel.
+ */
 class Kernel extends HttpKernel {
     /**
      * The application's global HTTP middleware stack.

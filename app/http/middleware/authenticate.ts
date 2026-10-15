@@ -1,4 +1,7 @@
 const Middleware = require('@ostro/auth/middleware/authenticate')
+/**
+ * Class Authenticate.
+ */
 class Authenticate extends Middleware {
 
     /**
