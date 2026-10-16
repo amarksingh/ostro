@@ -24,7 +24,7 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $defaultMiddlewares: unknown[] = [
+    public override $defaultMiddlewares: unknown[] = [
         crossOrigin,
         compression,
         serveStatic,
@@ -40,7 +40,7 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $middlewareGroups: Record<string, unknown[]> = {
+    public override $middlewareGroups: Record<string, unknown[]> = {
         'web': [
             cookieParser,
             startSession,
@@ -55,7 +55,7 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $namedMiddlewares: Record<string, unknown> = {
+    public override $namedMiddlewares: Record<string, unknown> = {
         'guest': redirectIfAuthenticated,
         'auth': authenticate,
     };

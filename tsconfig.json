@@ -1,3 +1,26 @@
 {
-  "extends": "../../tsconfig.base.json"
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./build",
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false
+  },
+  "include": [
+    "./*.ts",
+    "app/**/*.ts",
+    "bootstrap/**/*.ts",
+    "config/**/*.ts",
+    "database/**/*.ts",
+    "routes/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test",
+    "build"
+  ]
 }

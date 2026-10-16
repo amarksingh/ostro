@@ -18,7 +18,7 @@ class CreateUsersTables extends Migration {
      *
      * @returns {Promise<void>}
      */
-    async up(): Promise<void> {
+    public override async up(): Promise<void> {
         await (Schema as any).create('users', function (table: BlueprintLike) {
             table.increments('id').primary();
             table.string('name');
@@ -35,7 +35,7 @@ class CreateUsersTables extends Migration {
      *
      * @returns {Promise<void>}
      */
-    async down(): Promise<void> {
+    public override async down(): Promise<void> {
         await (Schema as any).dropIfExists('users');
     }
 }

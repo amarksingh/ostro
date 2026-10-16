@@ -8,4 +8,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/coveragebuild/
+/coverage
+build
+/build

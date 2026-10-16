@@ -5,14 +5,14 @@ import ConsoleKernel from '@ostro/foundation/console/kernel';
  */
 class Kernel extends ConsoleKernel {
 
-    $commands: Record<string, unknown> = {};
+    public override $commands: Record<string, unknown> = {};
 
     /**
      * Register the commands for the application.
      *
      * @returns {void}
      */
-    commands(): void {
+    public override commands(): void {
         this.load(__dirname + '/commands');
     }
 

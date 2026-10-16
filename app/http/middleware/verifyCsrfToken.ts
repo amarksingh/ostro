@@ -5,9 +5,9 @@ import Middleware from '@ostro/foundation/http/middleware/verifyCsrfToken';
  */
 class VerifyCsrfToken extends Middleware {
 
-    $addHttpCookie: boolean = true;
+    public override $addHttpCookie: boolean = true;
 
-    $except: string[] = [
+    public override $except: string[] = [
 
     ];
 }

@@ -5,11 +5,11 @@ import ExceptionHandler from '@ostro/foundation/exception/handler';
  */
 class Handler extends ExceptionHandler {
 
-    $dontReport: unknown[] = [
+    public override $dontReport: unknown[] = [
 
     ];
     
-    $dontFlash: string[] = [
+    public override $dontFlash: string[] = [
         'current_password',
         'password',
         'password_confirmation',

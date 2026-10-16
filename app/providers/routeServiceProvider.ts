@@ -14,14 +14,14 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @var string
      */
-    $namespace: string = base_path('app/http/controllers');
+    public override $namespace: string = base_path('app/http/controllers');
 
     /**
      * Layer handler in middleware for routes.
      *
      * @returns {void}
      */
-    boot(): void {
+    public override boot(): void {
         this.map();
     }
 
@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @returns {void}
      */
-    map(): void {
+    public map(): void {
         this.mapApiRoutes();
         this.mapWebRoutes();
     }
@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @returns {void}
      */
-    mapApiRoutes(): void {
+    protected mapApiRoutes(): void {
         (route as any).prefix('api')
             .namespace(this.$namespace)
             .group(base_path('routes/api'));
@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @returns {void}
      */
-    mapWebRoutes(): void {
+    protected mapWebRoutes(): void {
         (route as any).middleware('web')
             .namespace(this.$namespace)
             .group(base_path('routes/web'));

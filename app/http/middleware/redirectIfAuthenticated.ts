@@ -10,7 +10,7 @@ class RedirectIfAuthenticated extends Middleware {
      *
      * @returns Redirect URL path.
      */
-    redirectTo(): string {
+    public override redirectTo(): string {
         return '/dashboard';
     }
 }

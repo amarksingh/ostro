@@ -1,1 +1,0 @@
-{"version":3,"file":"authenticate.js","sourceRoot":"","sources":["../../../../app/http/middleware/authenticate.ts"],"names":[],"mappings":";;;;;AAAA,uFAA6D;AAO7D;;GAEG;AACH,MAAM,YAAa,SAAQ,sBAAU;IAEjC;;;;;OAKG;IACH,UAAU,CAAC,QAAqB;QAC5B,IAAI,CAAC,QAAQ,CAAC,WAAW,EAAE,EAAE,CAAC;YAC1B,OAAO,QAAQ,CAAC;QACpB,CAAC;IACL,CAAC;CACJ;kBAEc,YAAY"}

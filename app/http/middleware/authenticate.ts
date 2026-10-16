@@ -16,7 +16,7 @@ class Authenticate extends Middleware {
      * @param $request - Incoming HTTP request instance.
      * @returns Redirect URL or undefined if JSON is expected.
      */
-    redirectTo($request: RequestLike): string | undefined {
+    public override redirectTo($request: RequestLike): string | undefined {
         if (!$request.expectsJson()) {
             return '/login';
         }
