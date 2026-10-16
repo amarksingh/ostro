@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder {
      *
      * @returns {Promise<void>}
      */
-    async run(): Promise<void> {
+    override run: any = async () => {
         // call seeder
     }
 

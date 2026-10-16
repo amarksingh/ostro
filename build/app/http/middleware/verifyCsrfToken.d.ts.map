@@ -1,0 +1,1 @@
+{"version":3,"file":"verifyCsrfToken.d.ts","sourceRoot":"","sources":["../../../../app/http/middleware/verifyCsrfToken.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,mDAAmD,CAAC;AAE3E;;GAEG;AACH,cAAM,eAAgB,SAAQ,UAAU;IAEpC,cAAc,EAAE,OAAO,CAAQ;IAE/B,OAAO,EAAE,MAAM,EAAE,CAEf;CACL;eAEc,eAAe"}

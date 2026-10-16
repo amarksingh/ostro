@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider {
      * @returns {void}
      */
     mapApiRoutes(): void {
-        route.prefix('api')
+        (route as any).prefix('api')
             .namespace(this.$namespace)
             .group(base_path('routes/api'));
     }
@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider {
      * @returns {void}
      */
     mapWebRoutes(): void {
-        route.middleware('web')
+        (route as any).middleware('web')
             .namespace(this.$namespace)
             .group(base_path('routes/web'));
     }

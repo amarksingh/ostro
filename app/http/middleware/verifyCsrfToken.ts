@@ -7,7 +7,7 @@ class VerifyCsrfToken extends Middleware {
 
     $addHttpCookie: boolean = true;
 
-    $except: (string | RegExp)[] = [
+    $except: string[] = [
 
     ];
 }
