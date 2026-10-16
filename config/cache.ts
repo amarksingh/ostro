@@ -160,4 +160,4 @@ const config: CacheConfig = {
 
 };
 
-export = config;
+export default config;

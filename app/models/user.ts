@@ -1,4 +1,4 @@
-import Authenticatable = require('@ostro/foundation/auth/user');
+import Authenticatable from '@ostro/foundation/auth/user';
 
 /**
  * Class User.
@@ -18,4 +18,4 @@ class User extends Authenticatable {
 
 }
 
-export = User;
+export default User;

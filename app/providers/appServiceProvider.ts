@@ -7,4 +7,4 @@ class AppServiceProvider extends ServiceProvider {
 
 }
 
-export = AppServiceProvider;
+export default AppServiceProvider;

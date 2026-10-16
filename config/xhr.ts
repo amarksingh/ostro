@@ -103,4 +103,4 @@ const config: XhrConfig = {
   },
 };
 
-export = config;
+export default config;

@@ -125,4 +125,4 @@ const config: FilesystemConfig = {
     },
 };
 
-export = config;
+export default config;

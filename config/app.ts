@@ -232,4 +232,4 @@ const config: AppConfig = {
 
 };
 
-export = config;
+export default config;

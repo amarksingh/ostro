@@ -25,4 +25,4 @@ server.register(kernel.handle());
 
 server.start();
 
-export = server;
+export default server;

@@ -84,4 +84,4 @@ const config: AuthConfig = {
 
 };
 
-export = config;
+export default config;

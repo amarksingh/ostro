@@ -31,4 +31,4 @@ function webRoutes(route: RouteRegistrar): void {
     });
 }
 
-export = webRoutes;
+export default webRoutes;

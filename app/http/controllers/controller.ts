@@ -9,4 +9,4 @@ class Controller extends implement(BaseController, validatesRequests) {
    
 }
 
-export = Controller;
+export default Controller;

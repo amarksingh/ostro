@@ -23,4 +23,4 @@ app.singleton(
     ExceptionHandler
 );
 
-export = app;
+export default app;

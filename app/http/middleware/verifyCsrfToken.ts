@@ -12,4 +12,4 @@ class VerifyCsrfToken extends Middleware {
     ];
 }
 
-export = VerifyCsrfToken;
+export default VerifyCsrfToken;

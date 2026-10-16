@@ -47,4 +47,4 @@ function apiRoutes(route: RouteRegistrar): void {
     }).middleware('auth:api');
 }
 
-export = apiRoutes;
+export default apiRoutes;

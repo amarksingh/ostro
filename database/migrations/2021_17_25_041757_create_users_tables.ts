@@ -40,4 +40,4 @@ class CreateUsersTables extends Migration {
     }
 }
 
-export = CreateUsersTables;
+export default CreateUsersTables;

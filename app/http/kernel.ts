@@ -61,4 +61,4 @@ class Kernel extends HttpKernel {
     };
 }
 
-export = Kernel;
+export default Kernel;

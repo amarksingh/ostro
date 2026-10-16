@@ -102,4 +102,4 @@ const config: LoggingConfig = {
     },
 };
 
-export = config;
+export default config;

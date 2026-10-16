@@ -1,9 +1,34 @@
-require('@ostro/support/helpers');
-const path = require('path');
-const Facade = require('@ostro/support/facades/facade');
+import '@ostro/support/helpers';
+import path from 'path';
+import Facade from '@ostro/support/facades/facade';
+import appInstance from '../bootstrap/app';
+import User from '../app/models/user';
+import Handler from '../app/exceptions/handler';
+import Controller from '../app/http/controllers/controller';
+import RedirectIfAuthenticated from '../app/http/middleware/redirectIfAuthenticated';
+import Authenticate from '../app/http/middleware/authenticate';
+import VerifyCsrfToken from '../app/http/middleware/verifyCsrfToken';
+import HttpKernel from '../app/http/kernel';
+import ConsoleKernel from '../app/console/kernel';
+import AppServiceProvider from '../app/providers/appServiceProvider';
+import RouteServiceProvider from '../app/providers/routeServiceProvider';
+import webRoutes from '../routes/web';
+import apiRoutes from '../routes/api';
+import DatabaseSeeder from '../database/seeders/databaseSeeder';
+import CreateUsersTables from '../database/migrations/2021_17_25_041757_create_users_tables';
+import appConfig from '../config/app';
+import authConfig from '../config/auth';
+import cacheConfig from '../config/cache';
+import databaseConfig from '../config/database';
+import filesystemConfig from '../config/filesystem';
+import hashingConfig from '../config/hashing';
+import loggingConfig from '../config/logging';
+import sessionConfig from '../config/session';
+import viewConfig from '../config/view';
+import xhrConfig from '../config/xhr';
 
 describe('Ostro App Skeleton Unit Tests', () => {
-    let appMock;
+    let appMock: any;
 
     beforeEach(() => {
         appMock = {
@@ -37,22 +62,20 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Bootstrap and Application', () => {
         test('bootstrap/app.js creates and configures Application instance', () => {
-            const app = require('../bootstrap/app');
-            expect(app).toBeDefined();
-            expect(typeof app.singleton).toBe('function');
-            expect(typeof app.make).toBe('function');
-            expect(app.basePath()).toBe(path.resolve(__dirname, '..'));
+            expect(appInstance).toBeDefined();
+            expect(typeof appInstance.singleton).toBe('function');
+            expect(typeof appInstance.make).toBe('function');
+            expect(appInstance.basePath()).toBe(path.resolve(__dirname, '..'));
 
             // Verify singletons are bound in the container
-            expect(app.bound('@ostro/contracts/http/kernel')).toBe(true);
-            expect(app.bound('@ostro/contracts/console/kernel')).toBe(true);
-            expect(app.bound('@ostro/contracts/exception/handler')).toBe(true);
+            expect(appInstance.bound('@ostro/contracts/http/kernel')).toBe(true);
+            expect(appInstance.bound('@ostro/contracts/console/kernel')).toBe(true);
+            expect(appInstance.bound('@ostro/contracts/exception/handler')).toBe(true);
         });
     });
 
     describe('Models', () => {
         test('User model has correct fillable and hidden attributes', () => {
-            const User = require('../app/models/user');
             const user = new User({
                 name: 'Amar',
                 email: 'amar@ostrojs.com',
@@ -67,8 +90,8 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Exceptions', () => {
         test('Handler exception class configuration', () => {
-            const origApp = global.app;
-            global.app = jest.fn((key) => {
+            const origApp = (global as any).app;
+            (global as any).app = jest.fn((key: string) => {
                 if (key === 'logger') {
                     return {
                         error: jest.fn(),
@@ -78,7 +101,6 @@ describe('Ostro App Skeleton Unit Tests', () => {
                 return null;
             });
 
-            const Handler = require('../app/exceptions/handler');
             const handler = new Handler({});
             expect(handler.$dontReport).toEqual([]);
             expect(handler.$dontFlash).toEqual([
@@ -87,13 +109,12 @@ describe('Ostro App Skeleton Unit Tests', () => {
                 'password_confirmation'
             ]);
 
-            global.app = origApp;
+            (global as any).app = origApp;
         });
     });
 
     describe('Http Controllers and Middleware', () => {
         test('Controller base class instantiates and implements validatesRequests', () => {
-            const Controller = require('../app/http/controllers/controller');
             const ctrl = new Controller();
             expect(ctrl).toBeDefined();
             expect(typeof ctrl.validate).toBe('function');
@@ -101,13 +122,11 @@ describe('Ostro App Skeleton Unit Tests', () => {
         });
 
         test('RedirectIfAuthenticated redirects to /dashboard', () => {
-            const RedirectIfAuthenticated = require('../app/http/middleware/redirectIfAuthenticated');
             const middleware = new RedirectIfAuthenticated();
             expect(middleware.redirectTo()).toBe('/dashboard');
         });
 
         test('Authenticate middleware handles json and non-json requests', () => {
-            const Authenticate = require('../app/http/middleware/authenticate');
             const middleware = new Authenticate();
 
             // When request does not expect JSON
@@ -124,14 +143,12 @@ describe('Ostro App Skeleton Unit Tests', () => {
         });
 
         test('VerifyCsrfToken middleware configuration', () => {
-            const VerifyCsrfToken = require('../app/http/middleware/verifyCsrfToken');
             const middleware = new VerifyCsrfToken();
             expect(middleware.$addHttpCookie).toBe(true);
             expect(middleware.$except).toEqual([]);
         });
 
         test('Http Kernel defines default middleware and groups', () => {
-            const HttpKernel = require('../app/http/kernel');
             HttpKernel.prototype.$app = appMock;
 
             const kernel = new HttpKernel();
@@ -149,7 +166,6 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Console Kernel', () => {
         test('Console Kernel defines commands and registers them', () => {
-            const ConsoleKernel = require('../app/console/kernel');
             ConsoleKernel.prototype.$app = appMock;
 
             const kernel = new ConsoleKernel();
@@ -165,13 +181,11 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Service Providers', () => {
         test('AppServiceProvider registers cleanly', () => {
-            const AppServiceProvider = require('../app/providers/appServiceProvider');
             const provider = new AppServiceProvider({});
             expect(provider).toBeDefined();
         });
 
         test('RouteServiceProvider maps web and api routes', () => {
-            const RouteServiceProvider = require('../app/providers/routeServiceProvider');
             const provider = new RouteServiceProvider({});
 
             const mapApiSpy = jest.spyOn(provider, 'mapApiRoutes').mockImplementation(() => {});
@@ -201,10 +215,9 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Routes', () => {
         test('routes/web.js registers GET / route and executes handler', () => {
-            const webRoutes = require('../routes/web');
-            let registeredHandler = null;
-            const mockRoute = {
-                get: jest.fn((path, handler) => {
+            let registeredHandler: any = null;
+            const mockRoute: any = {
+                get: jest.fn((path: string, handler: Function) => {
                     registeredHandler = handler;
                     return mockRoute;
                 })
@@ -220,13 +233,12 @@ describe('Ostro App Skeleton Unit Tests', () => {
         });
 
         test('routes/api.js registers GET user route and executes handler', async () => {
-            const apiRoutes = require('../routes/api');
-            let registeredHandler = null;
+            let registeredHandler: any = null;
             const mockRouteObj = {
                 middleware: jest.fn().mockReturnThis()
             };
-            const mockRoute = {
-                get: jest.fn((path, handler) => {
+            const mockRoute: any = {
+                get: jest.fn((path: string, handler: Function) => {
                     registeredHandler = handler;
                     return mockRouteObj;
                 })
@@ -253,17 +265,15 @@ describe('Ostro App Skeleton Unit Tests', () => {
 
     describe('Database Migrations and Seeders', () => {
         test('DatabaseSeeder run executes without error', async () => {
-            const DatabaseSeeder = require('../database/seeders/databaseSeeder');
             const seeder = new DatabaseSeeder();
             await expect(seeder.run()).resolves.toBeUndefined();
         });
 
         test('CreateUsersTables migration up and down execution', async () => {
-            const CreateUsersTables = require('../database/migrations/2021_17_25_041757_create_users_tables');
             const migration = new CreateUsersTables();
 
-            let tableCallback = null;
-            appMock['db.schema'].create.mockImplementation(async (tableName, callback) => {
+            let tableCallback: any = null;
+            appMock['db.schema'].create.mockImplementation(async (tableName: string, callback: Function) => {
                 tableCallback = callback;
             });
 
@@ -289,6 +299,42 @@ describe('Ostro App Skeleton Unit Tests', () => {
             // Run down
             await migration.down();
             expect(appMock['db.schema'].dropIfExists).toHaveBeenCalledWith('users');
+        });
+    });
+
+    describe('Configuration Files', () => {
+        test('config files export valid configuration objects', () => {
+            expect(appConfig.name).toBeDefined();
+            expect(appConfig.providers).toBeInstanceOf(Array);
+            expect(appConfig.aliases).toBeDefined();
+
+            expect(authConfig.defaults.guard).toBe('web');
+            expect(authConfig.guards.web).toBeDefined();
+            expect(authConfig.providers.users).toBeDefined();
+
+            expect(cacheConfig.default).toBeDefined();
+            expect(cacheConfig.stores).toBeDefined();
+
+            expect(databaseConfig.default).toBeDefined();
+            expect(databaseConfig.connections).toBeDefined();
+
+            expect(filesystemConfig.default).toBeDefined();
+            expect(filesystemConfig.disks).toBeDefined();
+
+            expect(hashingConfig.driver).toBeDefined();
+            expect(hashingConfig.bcrypt).toBeDefined();
+
+            expect(loggingConfig.default).toBeDefined();
+            expect(loggingConfig.channels).toBeDefined();
+
+            expect(sessionConfig.driver).toBeDefined();
+            expect(sessionConfig.lifetime).toBeDefined();
+
+            expect(viewConfig.default).toBeDefined();
+            expect(viewConfig.engines).toBeDefined();
+
+            expect(xhrConfig.default).toBeDefined();
+            expect(xhrConfig.requests).toBeDefined();
         });
     });
 });

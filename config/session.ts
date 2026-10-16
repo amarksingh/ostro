@@ -226,4 +226,4 @@ const config: SessionConfig = {
     
 };
 
-export = config;
+export default config;

@@ -16,4 +16,4 @@ class DatabaseSeeder extends Seeder {
 
 }
 
-export = DatabaseSeeder;
+export default DatabaseSeeder;

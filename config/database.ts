@@ -173,4 +173,4 @@ const config: DatabaseConfig = {
   migrations: "migrations",
 };
 
-export = config;
+export default config;

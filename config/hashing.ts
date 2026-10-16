@@ -62,4 +62,4 @@ const config: HashingConfig = {
     
 };
 
-export = config;
+export default config;

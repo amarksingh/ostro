@@ -23,4 +23,4 @@ class Authenticate extends Middleware {
     }
 }
 
-export = Authenticate;
+export default Authenticate;

@@ -18,4 +18,4 @@ class Kernel extends ConsoleKernel {
 
 }
 
-export = Kernel;
+export default Kernel;

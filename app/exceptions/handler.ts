@@ -16,4 +16,4 @@ class Handler extends ExceptionHandler {
     ];
 }
 
-export = Handler;
+export default Handler;

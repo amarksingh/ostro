@@ -137,4 +137,4 @@ const config: ViewConfig = {
   },
 };
 
-export = config;
+export default config;
