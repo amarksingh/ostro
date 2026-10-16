@@ -1,13 +1,28 @@
-const app = require('./bootstrap/app')
+import app from './bootstrap/app';
+import requestHandler from '@ostro/foundation/http/request';
+import responseHandler from '@ostro/foundation/http/response';
 
-let kernel = app.make('@ostro/contracts/http/kernel');
+interface HttpKernel {
+    handle(): unknown;
+}
 
-let server = app.make('@ostro/server',app.config);
+interface Server {
+    request(handler: unknown): void;
+    response(handler: unknown): void;
+    register(middleware: unknown): void;
+    start(): unknown;
+}
 
-server.request(require('@ostro/foundation/http/request'))
+const kernel: HttpKernel = app.make('@ostro/contracts/http/kernel');
 
-server.response(require('@ostro/foundation/http/response'))
+const server: Server = app.make('@ostro/server', (app as unknown as { config: unknown }).config);
 
-server.register(kernel.handle())
+server.request(requestHandler);
 
-server.start()
+server.response(responseHandler);
+
+server.register(kernel.handle());
+
+server.start();
+
+export = server;

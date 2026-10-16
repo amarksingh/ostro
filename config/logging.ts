@@ -1,4 +1,48 @@
-module.exports =  {
+import { env, storage_path } from '@ostro/support/function';
+
+interface StackChannelConfig {
+    driver: 'stack';
+    channels: string[];
+    ignore_exceptions: boolean;
+}
+
+interface SingleChannelConfig {
+    driver: 'single';
+    path: string;
+    level: string;
+}
+
+interface DailyChannelConfig {
+    driver: 'daily';
+    path: string;
+    date_pattern: string;
+    level: string;
+    days: number;
+}
+
+interface ConsoleChannelConfig {
+    driver: 'console';
+    level: string;
+}
+
+interface SyslogChannelConfig {
+    driver: 'syslog';
+    level: string;
+}
+
+type LogChannelConfig =
+    | StackChannelConfig
+    | SingleChannelConfig
+    | DailyChannelConfig
+    | ConsoleChannelConfig
+    | SyslogChannelConfig;
+
+interface LoggingConfig {
+    default: string;
+    channels: Record<string, LogChannelConfig>;
+}
+
+const config: LoggingConfig = {
 
     /*
     |--------------------------------------------------------------------------
@@ -10,7 +54,7 @@ module.exports =  {
     | defined in the "channels" object below.
     |
     */
-    'default' : env('LOG_CHANNEL', 'stack'),
+    'default': env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,35 +69,37 @@ module.exports =  {
     | Available Drivers: "single", "daily", "syslog", "custom", "stack", "console"
     |
     */
-    'channels' : {
-        'stack' : {
-            'driver' : 'stack',
-            'channels' : ['single'],       // Stack combines multiple channels into one
-            'ignore_exceptions' : false,   // Whether exceptions thrown by channels are ignored
+    'channels': {
+        'stack': {
+            'driver': 'stack',
+            'channels': ['single'],       // Stack combines multiple channels into one
+            'ignore_exceptions': false,   // Whether exceptions thrown by channels are ignored
         },
         
-        'single' : {
-            'driver' : 'single',           // Logs all messages to a single file
-            'path' : storage_path(`logs/ostro.log`),
-            'level' : 'debug',             // Minimum log level to record
+        'single': {
+            'driver': 'single',           // Logs all messages to a single file
+            'path': storage_path('logs/ostro.log'),
+            'level': 'debug',             // Minimum log level to record
         },
 
-        'daily' : {
-            'driver' : 'daily',            // Creates a new log file daily
-            'path' : storage_path(`logs/ostro-%DATE%.log`),
-            'date_pattern' : 'YYYY-MM-DD', // Date format for log filenames
-            'level' : 'debug',
-            'days' : 30,                   // How many days to keep logs before deleting
+        'daily': {
+            'driver': 'daily',            // Creates a new log file daily
+            'path': storage_path('logs/ostro-%DATE%.log'),
+            'date_pattern': 'YYYY-MM-DD', // Date format for log filenames
+            'level': 'debug',
+            'days': 30,                   // How many days to keep logs before deleting
         },
       
         'console': {
-            'driver' : 'console',          // Logs output to the console (stdout)
-            'level' : 'debug',
+            'driver': 'console',          // Logs output to the console (stdout)
+            'level': 'debug',
         },
         
-        'syslog' : {
-            'driver' : 'syslog',           // Sends logs to the system syslog service
-            'level' : 'debug',
+        'syslog': {
+            'driver': 'syslog',           // Sends logs to the system syslog service
+            'level': 'debug',
         },
     },
 };
+
+export = config;

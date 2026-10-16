@@ -1,7 +1,38 @@
-let http = require('http');
-let https = require('https');
+import http from 'http';
+import https from 'https';
+import { env } from '@ostro/support/function';
 
-module.exports = {
+interface AxiosRequestOptions {
+    maxContentLength: number;
+    httpAgent: http.Agent;
+    httpsAgent: https.Agent;
+    timeout: number;
+}
+
+interface AxiosRequestConfig {
+    driver: 'axios';
+    options: AxiosRequestOptions;
+}
+
+interface RequestAdapterOptions {
+    maxContentLength: number;
+    forever: boolean;
+    timeout: number;
+}
+
+interface RequestAdapterConfig {
+    driver: 'request';
+    options: RequestAdapterOptions;
+}
+
+type HttpRequestConfig = AxiosRequestConfig | RequestAdapterConfig;
+
+interface XhrConfig {
+    default: string;
+    requests: Record<string, HttpRequestConfig>;
+}
+
+const config: XhrConfig = {
   /*
   |--------------------------------------------------------------------------
   | Default XHR Adapter
@@ -71,3 +102,5 @@ module.exports = {
     },
   },
 };
+
+export = config;

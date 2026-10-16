@@ -1,4 +1,18 @@
-const HttpKernel = require('@ostro/foundation/http/kernel')
+import HttpKernel from '@ostro/foundation/http/kernel';
+import crossOrigin from '@ostro/http/middleware/crossOrigin';
+import compression from '@ostro/http/middleware/compression';
+import serveStatic from '@ostro/http/middleware/serveStatic';
+import bodyParserJson from '@ostro/http/middleware/bodyParserJson';
+import bodyParserUrlEncoded from '@ostro/http/middleware/bodyParserUrlEncoded';
+import formParser from '@ostro/http/middleware/formParser';
+import queryParser from '@ostro/http/middleware/queryParser';
+import startAuth from '@ostro/auth/middleware/startAuth';
+import cookieParser from '@ostro/cookie/middleware/cookieParser';
+import startSession from '@ostro/session/middleware/startSession';
+import verifyCsrfToken from './middleware/verifyCsrfToken';
+import redirectIfAuthenticated from './middleware/redirectIfAuthenticated';
+import authenticate from './middleware/authenticate';
+
 /**
  * Class Kernel.
  */
@@ -10,15 +24,15 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $defaultMiddlewares = [
-        require('@ostro/http/middleware/crossOrigin'),
-        require('@ostro/http/middleware/compression'),
-        require('@ostro/http/middleware/serveStatic'),
-        require('@ostro/http/middleware/bodyParserJson'),
-        require('@ostro/http/middleware/bodyParserUrlEncoded'),
-        require('@ostro/http/middleware/formParser'),
-        require('@ostro/http/middleware/queryParser'),
-        require('@ostro/auth/middleware/startAuth'),
+    $defaultMiddlewares: unknown[] = [
+        crossOrigin,
+        compression,
+        serveStatic,
+        bodyParserJson,
+        bodyParserUrlEncoded,
+        formParser,
+        queryParser,
+        startAuth,
     ];
 
     /**
@@ -26,14 +40,13 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $middlewareGroups = {
+    $middlewareGroups: Record<string, unknown[]> = {
         'web': [
-            require('@ostro/cookie/middleware/cookieParser'),
-            require('@ostro/session/middleware/startSession'),
-            require('~/app/http/middleware/verifyCsrfToken'),
-        ]
+            cookieParser,
+            startSession,
+            verifyCsrfToken,
+        ],
     };
-
 
     /**
      * The application's route middleware.
@@ -42,11 +55,10 @@ class Kernel extends HttpKernel {
      *
      * @var array
      */
-    $namedMiddlewares = {
-        'guest': require('~/app/http/middleware/redirectIfAuthenticated'),
-        'auth': require('~/app/http/middleware/authenticate')
+    $namedMiddlewares: Record<string, unknown> = {
+        'guest': redirectIfAuthenticated,
+        'auth': authenticate,
     };
-
 }
 
-module.exports = Kernel
+export = Kernel;

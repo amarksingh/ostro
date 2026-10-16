@@ -1,20 +1,21 @@
-const ConsoleKernel = require('@ostro/foundation/console/kernel')
+import ConsoleKernel from '@ostro/foundation/console/kernel';
+
 /**
  * Class Kernel.
  */
-class Kernel extends ConsoleKernel{
+class Kernel extends ConsoleKernel {
 
-	$commands = {};
+    $commands: Record<string, unknown> = {};
 
     /**
      * Register the commands for the application.
      *
-     * @return {void}
+     * @returns {void}
      */
-    commands()
-    {
-        this.load(__dirname+'/commands');
+    commands(): void {
+        this.load(__dirname + '/commands');
     }
 
 }
-module.exports = Kernel
+
+export = Kernel;

@@ -1,22 +1,21 @@
-const Authenticatable = require('@ostro/foundation/auth/user')
+import Authenticatable = require('@ostro/foundation/auth/user');
 
 /**
  * Class User.
  */
 class User extends Authenticatable {
 
-    $fillable = [
+    $fillable: string[] = [
         'name',
         'email',
-        'password'
-    ]
-
-    $hidden = [
         'password',
-        'remember_token'
-    ]
+    ];
 
-   
+    $hidden: string[] = [
+        'password',
+        'remember_token',
+    ];
+
 }
 
-module.exports = User
+export = User;

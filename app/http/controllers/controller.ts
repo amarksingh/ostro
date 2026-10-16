@@ -1,11 +1,12 @@
-const BaseController = require('@ostro/router/controller')
-const validatesRequests = require('@ostro/foundation/validation/validatesRequests');
+import BaseController from '@ostro/router/controller';
+import validatesRequests from '@ostro/foundation/validation/validatesRequests';
+import { implement } from '@ostro/support/function';
 
 /**
  * Class Controller.
  */
-class Controller extends implement(BaseController,validatesRequests){
+class Controller extends implement(BaseController, validatesRequests) {
    
 }
 
-module.exports = Controller
+export = Controller;

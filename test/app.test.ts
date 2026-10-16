@@ -23,6 +23,9 @@ describe('Ostro App Skeleton Unit Tests', () => {
             'db.schema': {
                 create: jest.fn(),
                 dropIfExists: jest.fn()
+            },
+            encrypter: {
+                encrypt: jest.fn((val) => 'encrypted_' + val)
             }
         };
         Facade.setFacadeApplication(appMock);

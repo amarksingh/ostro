@@ -1,4 +1,20 @@
-module.exports = {
+import { env } from '@ostro/support/function';
+
+interface BcryptConfig {
+    rounds: number;
+}
+
+interface CryptoConfig {
+    rounds: number;
+}
+
+interface HashingConfig {
+    driver: string;
+    bcrypt: BcryptConfig;
+    crypto: CryptoConfig;
+}
+
+const config: HashingConfig = {
 
     /*
     |--------------------------------------------------------------------------
@@ -12,7 +28,7 @@ module.exports = {
     | Supported: "bcrypt", "crypto"
     |
     */
-    'driver' : 'crypto',
+    'driver': 'crypto',
 
     /*
     |--------------------------------------------------------------------------
@@ -25,8 +41,8 @@ module.exports = {
     | security at the expense of performance.
     |
     */
-    'bcrypt' : {
-        'rounds' : env('BCRYPT_ROUNDS', 8),
+    'bcrypt': {
+        'rounds': env('BCRYPT_ROUNDS', 8),
     },
     
     /*
@@ -40,8 +56,10 @@ module.exports = {
     | password storage compared to bcrypt.
     |
     */
-    'crypto' : {
-        'rounds' : env('BCRYPT_ROUNDS', 10),
-    }
+    'crypto': {
+        'rounds': env('BCRYPT_ROUNDS', 10),
+    },
     
-}
+};
+
+export = config;

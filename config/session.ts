@@ -1,4 +1,27 @@
-module.exports =  {
+import { env, storage_path } from '@ostro/support/function';
+
+interface SessionConfig {
+    driver: string;
+    lifetime: number;
+    expire_on_close: boolean;
+    encrypt: boolean;
+    signed: boolean;
+    files: string;
+    connection: string | null;
+    table: string;
+    store: string | null;
+    lottery: [number, number];
+    cookie: string;
+    path: string;
+    domain: string | null;
+    secure: boolean;
+    http_only: boolean;
+    same_site: 'lax' | 'strict' | 'none' | null;
+    resave: boolean;
+    saveUninitialized: boolean;
+}
+
+const config: SessionConfig = {
 
     /*
     |--------------------------------------------------------------------------
@@ -10,7 +33,7 @@ module.exports =  {
     | 'cache', and 'memory'. You can configure the driver via env variable.
     |
     */
-    'driver' : env('SESSION_DRIVER', 'file'),
+    'driver': env('SESSION_DRIVER', 'file'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +45,7 @@ module.exports =  {
     | 'expire_on_close' option below.
     |
     */
-    'lifetime' : env('SESSION_LIFETIME', 120),
+    'lifetime': env('SESSION_LIFETIME', 120),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +56,7 @@ module.exports =  {
     | browser, otherwise sessions will persist for the full lifetime.
     |
     */
-    'expire_on_close' : false,
+    'expire_on_close': false,
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +67,7 @@ module.exports =  {
     | This helps protect sensitive session data at rest.
     |
     */
-    'encrypt' : false,
+    'encrypt': false,
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +78,7 @@ module.exports =  {
     | tampering on the client side.
     |
     */
-    'signed' : true,
+    'signed': true,
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +89,7 @@ module.exports =  {
     | where session files will be stored.
     |
     */
-    'files' : storage_path('framework/sessions'),
+    'files': storage_path('framework/sessions'),
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +100,7 @@ module.exports =  {
     | This should correspond to a connection defined in your database config.
     |
     */
-    'connection' : env('SESSION_CONNECTION', null),
+    'connection': env('SESSION_CONNECTION', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +111,7 @@ module.exports =  {
     | Only applicable if using the 'database' session driver.
     |
     */
-    'table' : 'sessions',
+    'table': 'sessions',
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +122,7 @@ module.exports =  {
     | specify which cache store to use from your cache configuration.
     |
     */
-    'store' : env('SESSION_STORE', null),
+    'store': env('SESSION_STORE', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -111,7 +134,7 @@ module.exports =  {
     | will occur on any given request. Defaults to 2% chance.
     |
     */
-    'lottery' : [2, 100],
+    'lottery': [2, 100],
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +145,7 @@ module.exports =  {
     | This cookie name is used regardless of which session driver you use.
     |
     */
-    'cookie' : env('SESSION_COOKIE', env('APP_NAME', 'ostro') + '_session').toLowerCase(),
+    'cookie': env('SESSION_COOKIE', env('APP_NAME', 'ostro') + '_session').toLowerCase(),
 
     /*
     |--------------------------------------------------------------------------
@@ -133,7 +156,7 @@ module.exports =  {
     | Default is '/' which means the cookie is available site-wide.
     |
     */
-    'path' : '/',
+    'path': '/',
 
     /*
     |--------------------------------------------------------------------------
@@ -144,7 +167,7 @@ module.exports =  {
     | Useful for sharing sessions across subdomains.
     |
     */
-    'domain' : env('SESSION_DOMAIN', null),
+    'domain': env('SESSION_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -155,7 +178,7 @@ module.exports =  {
     | connections, enhancing security for sensitive data.
     |
     */
-    'secure' : env('SESSION_SECURE_COOKIE', false),
+    'secure': env('SESSION_SECURE_COOKIE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +189,7 @@ module.exports =  {
     | cross-site scripting (XSS) attacks. Should generally be set to true.
     |
     */
-    'http_only' : true,
+    'http_only': true,
 
     /*
     |--------------------------------------------------------------------------
@@ -177,7 +200,7 @@ module.exports =  {
     | protect against CSRF attacks. Options: 'lax', 'strict', 'none', or null.
     |
     */
-    'same_site' : 'lax',
+    'same_site': 'lax',
 
     /*
     |--------------------------------------------------------------------------
@@ -202,3 +225,5 @@ module.exports =  {
     'saveUninitialized': true,
     
 };
+
+export = config;

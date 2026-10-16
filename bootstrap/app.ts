@@ -1,20 +1,26 @@
-require('@ostro/support/helpers')
-const app = new(require('@ostro/foundation/application'))(process.cwd())
+import '@ostro/support/helpers';
+import Application from '@ostro/foundation/application';
+import HttpKernel from '../app/http/kernel';
+import ConsoleKernel from '../app/console/kernel';
+import HandlerManager from '@ostro/foundation/exception/handlerManager';
+import ExceptionHandler from '../app/exceptions/handler';
+
+const app: Application = new Application(process.cwd());
 
 app.singleton(
     '@ostro/contracts/http/kernel',
-    require('../app/http/kernel')
+    HttpKernel
 );
 
 app.singleton(
     '@ostro/contracts/console/kernel',
-    require('../app/console/kernel')
+    ConsoleKernel
 );
 
 app.singleton(
     '@ostro/contracts/exception/handler',
-    require('@ostro/foundation/exception/handlerManager'),
-    require('../app/exceptions/handler')
+    HandlerManager,
+    ExceptionHandler
 );
 
-module.exports = app
+export = app;

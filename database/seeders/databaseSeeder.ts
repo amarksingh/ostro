@@ -1,18 +1,19 @@
-const Seeder = require('@ostro/database/seeder');
+import Seeder from '@ostro/database/seeder';
+
 /**
  * Class DatabaseSeeder.
  */
 class DatabaseSeeder extends Seeder {
 
     /**
-     * run method.
-     * @async
-     * @returns {any}
+     * Run the database seeds.
+     *
+     * @returns {Promise<void>}
      */
-    async run() {
+    async run(): Promise<void> {
         // call seeder
     }
-    
+
 }
 
-module.exports = DatabaseSeeder
+export = DatabaseSeeder;

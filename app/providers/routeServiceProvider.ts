@@ -1,6 +1,7 @@
-const route = require('@ostro/support/facades/route')
-const ServiceProvider = require('@ostro/foundation/providers/routeServiceProvider')
-const WebRoutes = require('~/routes/web')
+import route from '@ostro/support/facades/route';
+import ServiceProvider from '@ostro/foundation/providers/routeServiceProvider';
+import { base_path } from '@ostro/support/function';
+
 /**
  * Class RouteServiceProvider.
  */
@@ -13,47 +14,49 @@ class RouteServiceProvider extends ServiceProvider {
      *
      * @var string
      */
-
-    $namespace = base_path('app/http/controllers')
+    $namespace: string = base_path('app/http/controllers');
 
     /**
-     * Layer handler in middleware for routes
+     * Layer handler in middleware for routes.
      *
-     * @return void
+     * @returns {void}
      */
-    boot() {
-        this.map()
+    boot(): void {
+        this.map();
     }
 
     /**
      * Define the routes for the application.
      *
-     * @return void
+     * @returns {void}
      */
-    map() {
-        this.mapApiRoutes()
-        this.mapWebRoutes()
+    map(): void {
+        this.mapApiRoutes();
+        this.mapWebRoutes();
     }
 
     /**
-     * mapApiRoutes method.
-     * @returns {any}
+     * Map API routes.
+     *
+     * @returns {void}
      */
-    mapApiRoutes() {
+    mapApiRoutes(): void {
         route.prefix('api')
             .namespace(this.$namespace)
-            .group(base_path('routes/api'))
+            .group(base_path('routes/api'));
     }
     
     /**
-     * mapWebRoutes method.
-     * @returns {any}
+     * Map Web routes.
+     *
+     * @returns {void}
      */
-    mapWebRoutes() {
+    mapWebRoutes(): void {
         route.middleware('web')
             .namespace(this.$namespace)
-            .group(base_path('routes/web'))
+            .group(base_path('routes/web'));
     }
 
 }
-module.exports = RouteServiceProvider
+
+export = RouteServiceProvider;

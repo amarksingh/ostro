@@ -1,4 +1,19 @@
-module.exports = {
+import { env, view_path } from '@ostro/support/function';
+
+interface EngineConfig {
+    driver: string;
+    extension: string;
+    cache: boolean;
+    options: Record<string, unknown>;
+    root: string;
+}
+
+interface ViewConfig {
+    default: string;
+    engines: Record<string, EngineConfig>;
+}
+
+const config: ViewConfig = {
   /*
   |--------------------------------------------------------------------------
   | Default View Engine
@@ -121,3 +136,5 @@ module.exports = {
     },
   },
 };
+
+export = config;

@@ -1,15 +1,15 @@
-const Middleware = require('@ostro/foundation/http/middleware/verifyCsrfToken')
+import Middleware from '@ostro/foundation/http/middleware/verifyCsrfToken';
 
 /**
  * Class VerifyCsrfToken.
  */
-class VerifyCsrfToken extends Middleware{
-	
-    $addHttpCookie = true;
+class VerifyCsrfToken extends Middleware {
 
-    $except = [
+    $addHttpCookie: boolean = true;
+
+    $except: (string | RegExp)[] = [
 
     ];
 }
 
-module.exports = VerifyCsrfToken ;
+export = VerifyCsrfToken;

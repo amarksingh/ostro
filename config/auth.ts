@@ -1,4 +1,25 @@
-module.exports = {
+import UserModel from '../app/models/user';
+
+interface GuardConfig {
+    driver: string;
+    provider: string;
+    hash?: boolean;
+}
+
+interface ProviderConfig {
+    driver: string;
+    model: unknown;
+}
+
+interface AuthConfig {
+    defaults: {
+        guard: string;
+    };
+    guards: Record<string, GuardConfig>;
+    providers: Record<string, ProviderConfig>;
+}
+
+const config: AuthConfig = {
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +77,11 @@ module.exports = {
 
         'users': {
             'driver': 'eloquent',        // Uses an ORM model to retrieve users
-            'model': require('~/app/models/user'),  // Path to the User model class
+            'model': UserModel,          // Path to the User model class
         },
 
-    }
+    },
 
 };
+
+export = config;

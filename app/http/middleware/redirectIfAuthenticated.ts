@@ -1,4 +1,4 @@
-const Middleware = require('@ostro/auth/middleware/redirectIfAuthenticated')
+import Middleware from '@ostro/auth/middleware/redirectIfAuthenticated';
 
 /**
  * Class RedirectIfAuthenticated.
@@ -6,12 +6,13 @@ const Middleware = require('@ostro/auth/middleware/redirectIfAuthenticated')
 class RedirectIfAuthenticated extends Middleware {
 
     /**
-     * redirectTo method.
-     * @returns {any}
+     * Get the path the user should be redirected to when they are authenticated.
+     *
+     * @returns Redirect URL path.
      */
-    redirectTo() {
+    redirectTo(): string {
         return '/dashboard';
     }
 }
 
-module.exports = RedirectIfAuthenticated
+export = RedirectIfAuthenticated;

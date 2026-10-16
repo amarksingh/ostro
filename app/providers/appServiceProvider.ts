@@ -1,4 +1,4 @@
-const ServiceProvider = require('@ostro/support/serviceProvider');
+import ServiceProvider from '@ostro/support/serviceProvider';
 
 /**
  * Class AppServiceProvider.
@@ -7,4 +7,4 @@ class AppServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = AppServiceProvider
+export = AppServiceProvider;

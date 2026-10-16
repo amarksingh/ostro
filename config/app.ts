@@ -1,4 +1,45 @@
-module.exports = {
+import { env } from '@ostro/support/function';
+import authServiceProvider from '@ostro/auth/authServiceProvider';
+import cacheServiceProvider from '@ostro/cache/cacheServiceProvider';
+import foundationServiceProvider from '@ostro/foundation/providers/foundationServiceProvider';
+import encryptionServiceProvider from '@ostro/encryption/encryptionServiceProvider';
+import filesystemServiceProvider from '@ostro/filesystem/filesystemServiceProvider';
+import sessionServiceProvider from '@ostro/session/sessionServiceProvider';
+import cookieServiceProvider from '@ostro/cookie/cookieServiceProvider';
+import validationServiceProvider from '@ostro/validation/validationServiceProvider';
+import viewServiceProvider from '@ostro/view/viewServiceProvider';
+import consoleSupportServiceProvider from '@ostro/foundation/support/providers/consoleSupportServiceProvider';
+import databaseServiceProvider from '@ostro/database/databaseServiceProvider';
+import appServiceProvider from '../app/providers/appServiceProvider';
+import routeServiceProvider from '../app/providers/routeServiceProvider';
+
+import Route from '@ostro/support/facades/route';
+import Cache from '@ostro/support/facades/cache';
+import Storage from '@ostro/support/facades/storage';
+import Log from '@ostro/support/facades/log';
+import DB from '@ostro/support/facades/database';
+import Event from '@ostro/support/facades/event';
+import Hash from '@ostro/support/facades/hash';
+import Crypt from '@ostro/support/facades/crypt';
+
+interface AppConfig {
+    name: string;
+    port: number | string;
+    host: string;
+    env: string;
+    debug: boolean;
+    url: string;
+    asset_url: string | null;
+    timezone: string;
+    locale: string;
+    fallback_locale: string;
+    key: string | undefined;
+    cipher: string;
+    providers: unknown[];
+    aliases: Record<string, unknown>;
+}
+
+const config: AppConfig = {
 
     /*
     |--------------------------------------------------------------------------
@@ -153,19 +194,19 @@ module.exports = {
     |
     */
     'providers': [
-        require('@ostro/auth/authServiceProvider'),
-        require('@ostro/cache/cacheServiceProvider'),
-        require('@ostro/foundation/providers/foundationServiceProvider'),
-        require('@ostro/encryption/encryptionServiceProvider'),
-        require('@ostro/filesystem/filesystemServiceProvider'),
-        require('@ostro/session/sessionServiceProvider'),
-        require('@ostro/cookie/cookieServiceProvider'),
-        require('@ostro/validation/validationServiceProvider'),
-        require('@ostro/view/viewServiceProvider'),
-        require('@ostro/foundation/support/providers/consoleSupportServiceProvider'),
-        require('@ostro/database/databaseServiceProvider'),
-        require('~/app/providers/appServiceProvider'),
-        require('~/app/providers/routeServiceProvider')
+        authServiceProvider,
+        cacheServiceProvider,
+        foundationServiceProvider,
+        encryptionServiceProvider,
+        filesystemServiceProvider,
+        sessionServiceProvider,
+        cookieServiceProvider,
+        validationServiceProvider,
+        viewServiceProvider,
+        consoleSupportServiceProvider,
+        databaseServiceProvider,
+        appServiceProvider,
+        routeServiceProvider,
     ],
 
     /*
@@ -179,14 +220,16 @@ module.exports = {
     |
     */
     'aliases': {
-        'Route': require('@ostro/support/facades/route'),
-        'Cache': require('@ostro/support/facades/cache'),
-        'Storage': require('@ostro/support/facades/storage'),
-        'Log': require('@ostro/support/facades/log'),
-        'DB': require('@ostro/support/facades/database'),
-        'Event': require('@ostro/support/facades/event'),
-        'Hash': require('@ostro/support/facades/hash'),
-        'Crypt': require('@ostro/support/facades/crypt')
-    }
+        'Route': Route,
+        'Cache': Cache,
+        'Storage': Storage,
+        'Log': Log,
+        'DB': DB,
+        'Event': Event,
+        'Hash': Hash,
+        'Crypt': Crypt,
+    },
 
-}
+};
+
+export = config;
