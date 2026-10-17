@@ -67,6 +67,8 @@
     "webpack.mix.js",
     "tsconfig.json",
     "tsconfig.build.json",
+    "copy-assets.js",
+    ".gitignore",
     "README.md",
     "LICENSE.md",
     "AGY.md"
