@@ -18,7 +18,7 @@ function preparePackage(pkgDir = process.cwd()) {
 
     const pubPkg = { ...rootPkg };
 
-    delete pubPkg.devDependencies;
+    if (pubPkg.name !== "@ostro/ostro") delete pubPkg.devDependencies;
     delete pubPkg.scripts;
     delete pubPkg.files;
 
