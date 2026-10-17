@@ -1,20 +1,17 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "outDir": "./build",
     "rootDir": ".",
     "skipLibCheck": true,
     "noImplicitAny": false,
     "strict": false,
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
     "typeRoots": [
-      "./node_modules/@types",
-      "../node_modules/@types",
-      "../../node_modules/@types",
       "/Users/amarkumarsingh/.nvm/versions/node/v24.12.0/lib/node_modules/@types"
     ],
     "types": [
@@ -23,12 +20,15 @@
   },
   "include": [
     "./*.ts",
-    "**/*.ts"
+    "app/**/*.ts",
+    "bootstrap/**/*.ts",
+    "config/**/*.ts",
+    "database/**/*.ts",
+    "routes/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "test",
-    "coverage",
     "build"
   ]
 }

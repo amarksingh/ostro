@@ -20,8 +20,8 @@
     "hot": "mix watch --hot",
     "prod": "npm run production",
     "production": "mix --production",
-    "build": "tsc",
-    "build:clean": "rm -rf build && tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "build:clean": "rm -rf build && tsc -p tsconfig.build.json",
     "start": "node app.js",
     "start:prod": "node build/app.js"
   },
