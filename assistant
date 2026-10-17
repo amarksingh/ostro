@@ -1,5 +1,16 @@
-const app = require('./bootstrap/app')
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+const appPath = fs.existsSync(path.join(__dirname, 'bootstrap', 'app.js'))
+    ? './bootstrap/app'
+    : './build/bootstrap/app';
+
+const appModule = require(appPath);
+const app = appModule && appModule.default ? appModule.default : appModule;
+
 let kernel = app.make('@ostro/contracts/console/kernel');
 kernel.handle(
-	process.argv.slice(2),
-)
+    process.argv.slice(2),
+);
