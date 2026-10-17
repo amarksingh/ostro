@@ -1,7 +1,7 @@
 # @ostro/ostro — Antigravity AI Architecture & Knowledge Base
 
 > **Package Name**: `@ostro/ostro`
-> **Version**: `1.3.4`
+> **Version**: `2.0.0-alpha.1`
 > **Role in Ecosystem**: Main Developer Framework Starter Application
 
 ---
