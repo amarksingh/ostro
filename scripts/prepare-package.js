@@ -44,7 +44,8 @@ function preparePackage(pkgDir = process.cwd()) {
     if (pubPkg.exports) {
         const rewriteExports = (obj) => {
             if (typeof obj === 'string') return stripBuild(obj);
-            if (typeof obj === 'object' && obj !== null) {
+            if (Array.isArray(obj)) return obj.map(rewriteExports);
+            if (typeof obj === "object" && obj !== null) {
                 const res = {};
                 for (const [k, v] of Object.entries(obj)) {
                     res[k] = rewriteExports(v);
@@ -65,6 +66,8 @@ function preparePackage(pkgDir = process.cwd()) {
         }
     };
 
+    copyIfExists('tsconfig.json');
+    copyIfExists('tsconfig.build.json');
     copyIfExists('README.md');
     copyIfExists('LICENSE.md');
     copyIfExists('LICENSE');

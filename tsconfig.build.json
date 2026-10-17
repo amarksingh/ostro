@@ -13,8 +13,7 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "strict": false,
-    "esModuleInterop": false,
-    "declaration": false,
+        "declaration": false,
     "sourceMap": false,
     "typeRoots": [
       "./node_modules/@types",
