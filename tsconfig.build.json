@@ -15,7 +15,7 @@
     "strict": false,
     "esModuleInterop": false,
     "declaration": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "typeRoots": [
       "./node_modules/@types",
       "../node_modules/@types",

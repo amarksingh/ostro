@@ -337,4 +337,41 @@ describe('Ostro App Skeleton Unit Tests', () => {
             expect(xhrConfig.requests).toBeDefined();
         });
     });
+
+    describe('Server Application Entrypoint', () => {
+        test('app.ts configures and exports server', () => {
+            const serverMock = {
+                request: jest.fn(),
+                response: jest.fn(),
+                register: jest.fn(),
+                start: jest.fn()
+            };
+            const kernelMock = {
+                handle: jest.fn().mockReturnValue('kernel_handler')
+            };
+
+            const makeSpy = jest.spyOn(appInstance, 'make').mockImplementation((abstract: any, ...args: any[]) => {
+                if (abstract === '@ostro/contracts/http/kernel') {
+                    return kernelMock;
+                }
+                if (abstract === '@ostro/server') {
+                    return serverMock;
+                }
+                return null;
+            });
+
+            try {
+                const serverModule = require('../app');
+                const server = serverModule.default || serverModule;
+
+                expect(server).toBe(serverMock);
+                expect(serverMock.request).toHaveBeenCalled();
+                expect(serverMock.response).toHaveBeenCalled();
+                expect(serverMock.register).toHaveBeenCalled();
+                expect(serverMock.start).toHaveBeenCalled();
+            } finally {
+                makeSpy.mockRestore();
+            }
+        });
+    });
 });
