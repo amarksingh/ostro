@@ -50,5 +50,25 @@
   },
   "homepage": "https://github.com/ostrojs/ostro#readme",
   "main": "app.ts",
-  "types": "app.ts"
+  "types": "app.ts",
+  "files": [
+    "app",
+    "bootstrap",
+    "config",
+    "database",
+    "public",
+    "resources",
+    "routes",
+    "storage",
+    "build",
+    "app.ts",
+    "assistant",
+    ".env.example",
+    "webpack.mix.js",
+    "tsconfig.json",
+    "tsconfig.build.json",
+    "README.md",
+    "LICENSE.md",
+    "AGY.md"
+  ]
 }
