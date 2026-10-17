@@ -31,11 +31,11 @@ function preparePackage(pkgDir = process.cwd()) {
     if (pubPkg.types) pubPkg.types = stripBuild(pubPkg.types).replace(/^\.\//, '');
     if (pubPkg.bin) {
         if (typeof pubPkg.bin === 'string') {
-            pubPkg.bin = stripBuild(pubPkg.bin);
+            pubPkg.bin = stripBuild(pubPkg.bin).replace(/^\.\//, "");
         } else if (typeof pubPkg.bin === 'object') {
             const newBin = {};
             for (const [k, v] of Object.entries(pubPkg.bin)) {
-                newBin[k] = stripBuild(v);
+                newBin[k] = stripBuild(v).replace(/^\.\//, "");
             }
             pubPkg.bin = newBin;
         }
