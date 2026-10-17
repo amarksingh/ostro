@@ -6,6 +6,9 @@ module.exports = {
         "**/test/**/*.test.ts",
         "**/test/**/*.test.js"
     ],
+    "modulePathIgnorePatterns": [
+        "<rootDir>/build"
+    ],
     "transform": {
         "^.+\\.ts$": [
             tsJestPath,
