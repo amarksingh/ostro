@@ -9,15 +9,7 @@
 |
 */
 
-interface RouteContext {
-    view(name: string, data?: Record<string, unknown>): unknown;
-    [key: string]: unknown;
-}
-
-interface RouteRegistrar {
-    get(path: string, handler: (context: RouteContext) => unknown): unknown;
-    [key: string]: unknown;
-}
+import type { RouteContext, RouteRegistrar } from '@ostro/contracts/router';
 
 /**
  * Register web routes for the application.

@@ -1,9 +1,5 @@
 import Middleware from '@ostro/auth/middleware/authenticate';
-
-interface RequestLike {
-    expectsJson(): boolean;
-    [key: string]: unknown;
-}
+import type { IHttpRequest } from '@ostro/contracts/http/request';
 
 /**
  * Class Authenticate.
@@ -16,7 +12,7 @@ class Authenticate extends Middleware {
      * @param $request - Incoming HTTP request instance.
      * @returns Redirect URL or undefined if JSON is expected.
      */
-    public override redirectTo($request: RequestLike): string | undefined {
+    public override redirectTo($request: IHttpRequest): string | undefined {
         if (!$request.expectsJson()) {
             return '/login';
         }

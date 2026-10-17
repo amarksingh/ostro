@@ -1,37 +1,6 @@
 import { env, storage_path, public_path, view_path } from '@ostro/support/function';
 
-interface LocalDiskConfig {
-    driver: 'local';
-    root: string;
-    encoding: string;
-}
-
-interface AzureDiskConfig {
-    driver: 'azure';
-    key?: string;
-    account?: string;
-    container?: string;
-    url?: string;
-}
-
-interface S3DiskConfig {
-    driver: 's3';
-    key?: string;
-    secret?: string;
-    region?: string;
-    bucket?: string;
-    url?: string;
-    endpoint?: string;
-    use_path_style_endpoint: boolean;
-}
-
-type FilesystemDiskConfig = LocalDiskConfig | AzureDiskConfig | S3DiskConfig;
-
-interface FilesystemConfig {
-    default: string;
-    cloud: string;
-    disks: Record<string, FilesystemDiskConfig>;
-}
+import type { FilesystemConfig } from '@ostro/contracts/config/filesystem';
 
 const config: FilesystemConfig = {
 

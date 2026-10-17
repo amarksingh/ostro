@@ -1,18 +1,6 @@
 import { env } from '@ostro/support/function';
 
-interface BcryptConfig {
-    rounds: number;
-}
-
-interface CryptoConfig {
-    rounds: number;
-}
-
-interface HashingConfig {
-    driver: string;
-    bcrypt: BcryptConfig;
-    crypto: CryptoConfig;
-}
+import type { HashingConfig } from '@ostro/contracts/config/hashing';
 
 const config: HashingConfig = {
 

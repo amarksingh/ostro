@@ -1,25 +1,6 @@
 import { env, storage_path } from '@ostro/support/function';
 
-interface SessionConfig {
-    driver: string;
-    lifetime: number;
-    expire_on_close: boolean;
-    encrypt: boolean;
-    signed: boolean;
-    files: string;
-    connection: string | null;
-    table: string;
-    store: string | null;
-    lottery: [number, number];
-    cookie: string;
-    path: string;
-    domain: string | null;
-    secure: boolean;
-    http_only: boolean;
-    same_site: 'lax' | 'strict' | 'none' | null;
-    resave: boolean;
-    saveUninitialized: boolean;
-}
+import type { SessionConfig } from '@ostro/contracts/config/session';
 
 const config: SessionConfig = {
 

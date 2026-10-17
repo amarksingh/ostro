@@ -1,27 +1,18 @@
 import app from './bootstrap/app';
 import requestHandler from '@ostro/foundation/http/request';
 import responseHandler from '@ostro/foundation/http/response';
+import type { IHttpKernel } from '@ostro/contracts/http/kernel';
+import type { IServer } from '@ostro/contracts/server/server';
 
-interface HttpKernel {
-    handle(): unknown;
-}
+const kernel: IHttpKernel = app.make('@ostro/contracts/http/kernel');
 
-interface Server {
-    request(handler: unknown): void;
-    response(handler: unknown): void;
-    register(middleware: unknown): void;
-    start(): unknown;
-}
-
-const kernel: HttpKernel = app.make('@ostro/contracts/http/kernel');
-
-const server: Server = app.make('@ostro/server', (app as unknown as { config: unknown }).config);
+const server: IServer = app.make('@ostro/server', (app as unknown as { config: unknown }).config);
 
 server.request(requestHandler);
 
 server.response(responseHandler);
 
-server.register(kernel.handle());
+server.register(kernel.handle({} as any));
 
 server.start();
 

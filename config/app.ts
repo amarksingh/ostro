@@ -21,23 +21,7 @@ import DB from '@ostro/support/facades/database';
 import Event from '@ostro/support/facades/event';
 import Hash from '@ostro/support/facades/hash';
 import Crypt from '@ostro/support/facades/crypt';
-
-interface AppConfig {
-    name: string;
-    port: number | string;
-    host: string;
-    env: string;
-    debug: boolean;
-    url: string;
-    asset_url: string | null;
-    timezone: string;
-    locale: string;
-    fallback_locale: string;
-    key: string | undefined;
-    cipher: string;
-    providers: unknown[];
-    aliases: Record<string, unknown>;
-}
+import type { AppConfig } from '@ostro/contracts/config/app';
 
 const config: AppConfig = {
 

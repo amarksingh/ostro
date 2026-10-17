@@ -14,12 +14,12 @@
     "noImplicitAny": false,
     "strict": false,
     "esModuleInterop": false,
-    "declaration": true,
+    "declaration": false,
+    "sourceMap": true,
     "typeRoots": [
       "./node_modules/@types",
       "../node_modules/@types",
-      "../../node_modules/@types",
-      "/Users/amarkumarsingh/.nvm/versions/node/v24.12.0/lib/node_modules/@types"
+      "../../node_modules/@types"
     ]
   },
   "include": [

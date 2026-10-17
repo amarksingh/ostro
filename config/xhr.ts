@@ -2,35 +2,7 @@ import * as http from 'http';
 import * as https from 'https';
 import { env } from '@ostro/support/function';
 
-interface AxiosRequestOptions {
-    maxContentLength: number;
-    httpAgent: http.Agent;
-    httpsAgent: https.Agent;
-    timeout: number;
-}
-
-interface AxiosRequestConfig {
-    driver: 'axios';
-    options: AxiosRequestOptions;
-}
-
-interface RequestAdapterOptions {
-    maxContentLength: number;
-    forever: boolean;
-    timeout: number;
-}
-
-interface RequestAdapterConfig {
-    driver: 'request';
-    options: RequestAdapterOptions;
-}
-
-type HttpRequestConfig = AxiosRequestConfig | RequestAdapterConfig;
-
-interface XhrConfig {
-    default: string;
-    requests: Record<string, HttpRequestConfig>;
-}
+import type { XhrConfig } from '@ostro/contracts/config/xhr';
 
 const config: XhrConfig = {
   /*

@@ -19,13 +19,9 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production",
-    "build": "tsc -p tsconfig.build.json && node -e 'const fs=require(\"fs\"); [\".env.example\",\".gitignore\",\"README.md\",\"LICENSE.md\",\"assistant\",\"webpack.mix.js\"].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,\"build/\"+f)}); [\"public\",\"resources\",\"storage\"].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,\"build/\"+d,{recursive:true})});'",
+    "build": "rm -rf build && tsc -p tsconfig.build.json && node -e 'const fs=require(\"fs\"); [\".env.example\",\".gitignore\",\"README.md\",\"LICENSE.md\",\"assistant\",\"webpack.mix.js\"].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,\"build/\"+f)}); [\"public\",\"resources\",\"storage\"].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,\"build/\"+d,{recursive:true})}); const pkg=JSON.parse(fs.readFileSync(\"package.json\",\"utf8\")); pkg.scripts=pkg.scripts||{}; pkg.scripts[\"server:start\"]=\"node app.js\"; fs.writeFileSync(\"build/package.json\",JSON.stringify(pkg,null,2)+\"\\n\");'",
     "build:clean": "rm -rf build && npm run build",
-    "server:start": "ts-node app.ts",
-    "server": "npm run server:start",
-    "start": "node app.js",
-    "start:prod": "node build/app.js"
+    "server:start": "ts-node app.ts"
   },
   "dependencies": {
     "@ostro/framework": "^2.0.0-alpha.1"
@@ -35,7 +31,7 @@
     "@types/node": "^22.0.0",
     "axios": "^1.10.0",
     "laravel-mix": "^6.0.6",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "postcss": "^8.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.0"

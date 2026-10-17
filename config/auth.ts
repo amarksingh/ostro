@@ -1,23 +1,6 @@
 import UserModel from '~/app/models/user';
 
-interface GuardConfig {
-    driver: string;
-    provider: string;
-    hash?: boolean;
-}
-
-interface ProviderConfig {
-    driver: string;
-    model: unknown;
-}
-
-interface AuthConfig {
-    defaults: {
-        guard: string;
-    };
-    guards: Record<string, GuardConfig>;
-    providers: Record<string, ProviderConfig>;
-}
+import type { AuthConfig } from '@ostro/contracts/config/auth';
 
 const config: AuthConfig = {
 
