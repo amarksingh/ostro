@@ -10,8 +10,8 @@ import validationServiceProvider from '@ostro/validation/validationServiceProvid
 import viewServiceProvider from '@ostro/view/viewServiceProvider';
 import consoleSupportServiceProvider from '@ostro/foundation/support/providers/consoleSupportServiceProvider';
 import databaseServiceProvider from '@ostro/database/databaseServiceProvider';
-import appServiceProvider from '../app/providers/appServiceProvider';
-import routeServiceProvider from '../app/providers/routeServiceProvider';
+import appServiceProvider from '~/app/providers/appServiceProvider';
+import routeServiceProvider from '~/app/providers/routeServiceProvider';
 
 import Route from '@ostro/support/facades/route';
 import Cache from '@ostro/support/facades/cache';

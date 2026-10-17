@@ -1,4 +1,4 @@
-import UserModel from '../app/models/user';
+import UserModel from '~/app/models/user';
 
 interface GuardConfig {
     driver: string;

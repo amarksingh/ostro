@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+require('@ostro/support/helpers');
 
 const appPath = fs.existsSync(path.join(__dirname, 'bootstrap', 'app.js'))
     ? './bootstrap/app'

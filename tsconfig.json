@@ -1,14 +1,19 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "ignoreDeprecations": "6.0",
+    "isolatedModules": true,
     "outDir": "./build",
     "rootDir": ".",
+    "paths": {
+      "~/*": ["./*"]
+    },
     "skipLibCheck": true,
     "noImplicitAny": false,
-    "strict": false
+    "strict": false,
+    "esModuleInterop": true
   },
   "include": [
     "./*.ts",

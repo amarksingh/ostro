@@ -6,7 +6,7 @@ import { implement } from '@ostro/support/function';
  * Class Controller.
  */
 class Controller extends implement(BaseController, validatesRequests) {
-   
+
 }
 
 export default Controller;

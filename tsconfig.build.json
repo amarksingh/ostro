@@ -2,19 +2,24 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "./build",
     "rootDir": ".",
+    "paths": {
+      "~/*": [
+        "./*"
+      ]
+    },
     "skipLibCheck": true,
     "noImplicitAny": false,
     "strict": false,
+    "esModuleInterop": false,
     "declaration": true,
-    "sourceMap": true,
-    "declarationMap": true,
     "typeRoots": [
+      "./node_modules/@types",
+      "../node_modules/@types",
+      "../../node_modules/@types",
       "/Users/amarkumarsingh/.nvm/versions/node/v24.12.0/lib/node_modules/@types"
-    ],
-    "types": [
-      "node"
     ]
   },
   "include": [

@@ -20,8 +20,10 @@
     "hot": "mix watch --hot",
     "prod": "npm run production",
     "production": "mix --production",
-    "build": "tsc -p tsconfig.build.json && node copy-assets.js",
-    "build:clean": "rm -rf build && tsc -p tsconfig.build.json && node copy-assets.js",
+    "build": "tsc -p tsconfig.build.json && node -e 'const fs=require(\"fs\"); [\".env.example\",\".gitignore\",\"README.md\",\"LICENSE.md\",\"assistant\",\"webpack.mix.js\"].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,\"build/\"+f)}); [\"public\",\"resources\",\"storage\"].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,\"build/\"+d,{recursive:true})});'",
+    "build:clean": "rm -rf build && npm run build",
+    "server:start": "ts-node app.ts",
+    "server": "npm run server:start",
     "start": "node app.js",
     "start:prod": "node build/app.js"
   },
@@ -35,6 +37,7 @@
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
     "postcss": "^8.1.14",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.0"
   },
   "engines": {
@@ -67,10 +70,8 @@
     "webpack.mix.js",
     "tsconfig.json",
     "tsconfig.build.json",
-    "copy-assets.js",
     ".gitignore",
     "README.md",
-    "LICENSE.md",
-    "AGY.md"
+    "LICENSE.md"
   ]
 }

@@ -1,9 +1,9 @@
 import '@ostro/support/helpers';
 import Application from '@ostro/foundation/application';
-import HttpKernel from '../app/http/kernel';
-import ConsoleKernel from '../app/console/kernel';
+import HttpKernel from '~/app/http/kernel';
+import ConsoleKernel from '~/app/console/kernel';
 import HandlerManager from '@ostro/foundation/exception/handlerManager';
-import ExceptionHandler from '../app/exceptions/handler';
+import ExceptionHandler from '~/app/exceptions/handler';
 
 const app: Application = new Application(process.cwd());
 

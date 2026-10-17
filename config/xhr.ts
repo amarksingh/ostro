@@ -1,5 +1,5 @@
-import http from 'http';
-import https from 'https';
+import * as http from 'http';
+import * as https from 'https';
 import { env } from '@ostro/support/function';
 
 interface AxiosRequestOptions {
