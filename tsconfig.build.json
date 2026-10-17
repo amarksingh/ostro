@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "CommonJS",
+    "module": "NodeNext",
     "outDir": "./build",
     "rootDir": ".",
     "skipLibCheck": true,
