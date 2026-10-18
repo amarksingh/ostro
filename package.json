@@ -19,7 +19,7 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "build": "rm -rf build && tsc -p tsconfig.build.json && node -e \"const fs=require('fs'); ['.env.example','.gitignore','README.md','LICENSE.md','assistant','webpack.mix.js','app.ts','tsconfig.json','tsconfig.build.json'].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,'build/'+f)}); ['public','resources','storage','app','bootstrap','config','database','routes'].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,'build/'+d,{recursive:true})}); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); pkg.scripts=pkg.scripts||{}; pkg.scripts['server:start']='node app.js'; fs.writeFileSync('build/package.json',JSON.stringify(pkg,null,2)+'\\n');\" && npm run prepare-package",
+    "build": "rm -rf build && tsc -p tsconfig.build.json && node -e \"const fs=require('fs'); ['.env.example','.gitignore','README.md','LICENSE.md','assistant','webpack.mix.js','app.ts','tsconfig.json','tsconfig.build.json'].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,'build/'+f)}); ['public','resources','storage','app','bootstrap','config','database','routes'].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,'build/'+d,{recursive:true})});\" && npm run prepare-package",
     "build:clean": "rm -rf build && npm run build",
     "server:start": "ts-node app.ts",
     "prepare-package": "node scripts/prepare-package.js",

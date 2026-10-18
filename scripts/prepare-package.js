@@ -19,7 +19,21 @@ function preparePackage(pkgDir = process.cwd()) {
     const pubPkg = { ...rootPkg };
 
     if (pubPkg.name !== "@ostro/ostro") delete pubPkg.devDependencies;
-    delete pubPkg.scripts;
+    if (pubPkg.name === "@ostro/ostro") {
+        pubPkg.scripts = {
+            "dev": "npm run development",
+            "development": "mix",
+            "watch": "mix watch",
+            "watch-poll": "mix watch -- --watch-options-poll=1000",
+            "hot": "mix watch --hot",
+            "prod": "npm run production",
+            "build": "tsc -p tsconfig.build.json",
+            "build:clean": "rm -rf build && npm run build",
+            "server:start": "ts-node app.ts"
+        };
+    } else {
+        delete pubPkg.scripts;
+    }
     delete pubPkg.files;
 
     const stripBuild = (str) => {
