@@ -65,7 +65,7 @@ describe('Ostro App Skeleton Unit Tests', () => {
             expect(appInstance).toBeDefined();
             expect(typeof appInstance.singleton).toBe('function');
             expect(typeof appInstance.make).toBe('function');
-            expect(appInstance.basePath()).toBe(path.resolve(__dirname, '..'));
+            expect(appInstance.basePath()).toBe(process.cwd());
 
             // Verify singletons are bound in the container
             expect(appInstance.bound('@ostro/contracts/http/kernel')).toBe(true);

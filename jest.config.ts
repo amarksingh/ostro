@@ -33,7 +33,7 @@ export default {
         ]
     },
     "moduleNameMapper": {
-        "^~/(.*)$": "<rootDir>/$1",
+        "^~/(.*)$": "<rootDir>/src/$1",
         "^@ostro/support/(.*)$": "<rootDir>/../support/src/$1",
         "^@ostro/support$": "<rootDir>/../support/src",
         "^@ostro/contracts/(.*)$": "<rootDir>/../contracts/src/$1",
@@ -80,13 +80,16 @@ export default {
         "clover"
     ],
     "collectCoverageFrom": [
-        "<rootDir>/app/**/*.ts",
-        "<rootDir>/bootstrap/app.ts",
-        "<rootDir>/routes/**/*.ts",
-        "<rootDir>/database/migrations/**/*.ts",
-        "<rootDir>/database/seeders/**/*.ts",
+        "<rootDir>/src/app/**/*.ts",
+        "<rootDir>/src/bootstrap/app.ts",
+        "<rootDir>/src/routes/**/*.ts",
+        "<rootDir>/src/database/migrations/**/*.ts",
+        "<rootDir>/src/database/seeders/**/*.ts",
         "!<rootDir>/node_modules/**",
         "!<rootDir>/test/**",
+        "!<rootDir>/src/test/**",
+        "!<rootDir>/src/jest.config.ts",
+        "!<rootDir>/src/webpack.mix.js",
         "!<rootDir>/coverage/**"
     ]
 };

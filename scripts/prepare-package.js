@@ -10,6 +10,7 @@ function preparePackage(pkgDir = process.cwd()) {
 
     const rootPkg = JSON.parse(fs.readFileSync(rootPkgPath, 'utf8'));
     const buildDir = path.join(pkgDir, 'build');
+    const srcDir = path.join(pkgDir, 'src');
 
     if (!fs.existsSync(buildDir)) {
         console.error('Build directory does not exist: ' + buildDir);
@@ -20,6 +21,8 @@ function preparePackage(pkgDir = process.cwd()) {
 
     if (pubPkg.name !== "@ostro/ostro") delete pubPkg.devDependencies;
     if (pubPkg.name === "@ostro/ostro") {
+        pubPkg.main = "app.ts";
+        pubPkg.types = "app.ts";
         pubPkg.scripts = {
             "dev": "npm run development",
             "development": "mix",
@@ -29,7 +32,8 @@ function preparePackage(pkgDir = process.cwd()) {
             "prod": "npm run production",
             "build": "tsc -p tsconfig.build.json",
             "build:clean": "rm -rf build && npm run build",
-            "server:start": "ts-node app.ts"
+            "server:start": "ts-node app.ts",
+            "test": "npx jest"
         };
     } else {
         delete pubPkg.scripts;
@@ -41,8 +45,10 @@ function preparePackage(pkgDir = process.cwd()) {
         return str.replace(/^(\.\/)?build\//, './');
     };
 
-    if (pubPkg.main) pubPkg.main = stripBuild(pubPkg.main).replace(/^\.\//, '');
-    if (pubPkg.types) pubPkg.types = stripBuild(pubPkg.types).replace(/^\.\//, '');
+    if (pubPkg.name !== "@ostro/ostro") {
+        if (pubPkg.main) pubPkg.main = stripBuild(pubPkg.main).replace(/^\.\//, '');
+        if (pubPkg.types) pubPkg.types = stripBuild(pubPkg.types).replace(/^\.\//, '');
+    }
     if (pubPkg.bin) {
         if (typeof pubPkg.bin === 'string') {
             pubPkg.bin = stripBuild(pubPkg.bin).replace(/^\.\//, "");
@@ -73,18 +79,55 @@ function preparePackage(pkgDir = process.cwd()) {
 
     fs.writeFileSync(path.join(buildDir, 'package.json'), JSON.stringify(pubPkg, null, 2) + '\n');
 
-    const copyIfExists = (file) => {
+    const copyRootFile = (file) => {
         const src = path.join(pkgDir, file);
         if (fs.existsSync(src)) {
-            fs.copyFileSync(src, path.join(buildDir, file));
+            const dest = path.join(buildDir, file);
+            const stat = fs.statSync(src);
+            if (stat.isDirectory()) {
+                fs.cpSync(src, dest, { recursive: true });
+            } else {
+                fs.copyFileSync(src, dest);
+            }
         }
     };
 
-    copyIfExists('tsconfig.json');
-    copyIfExists('tsconfig.build.json');
-    copyIfExists('README.md');
-    copyIfExists('LICENSE.md');
-    copyIfExists('LICENSE');
+    const copyFromSrc = (item) => {
+        const src = path.join(srcDir, item);
+        if (fs.existsSync(src)) {
+            const dest = path.join(buildDir, item);
+            const stat = fs.statSync(src);
+            if (stat.isDirectory()) {
+                fs.cpSync(src, dest, { recursive: true });
+            } else {
+                fs.copyFileSync(src, dest);
+            }
+        }
+    };
+
+    // Copy root docs and configs
+    copyRootFile('README.md');
+    copyRootFile('LICENSE.md');
+    copyRootFile('LICENSE');
+    copyRootFile('.env.example');
+    copyRootFile('.gitignore');
+
+    // Copy framework components from src directly into build root (without src directory)
+    copyFromSrc('storage');
+    copyFromSrc('public');
+    copyFromSrc('resources');
+    copyFromSrc('assistant');
+    copyFromSrc('webpack.mix.js');
+    copyFromSrc('test');
+    copyFromSrc('jest.config.ts');
+    copyFromSrc('tsconfig.json');
+    copyFromSrc('tsconfig.build.json');
+    copyFromSrc('app.ts');
+    copyFromSrc('app');
+    copyFromSrc('bootstrap');
+    copyFromSrc('config');
+    copyFromSrc('database');
+    copyFromSrc('routes');
 
     console.log(`[prepare-package] Successfully prepared ${pubPkg.name}@${pubPkg.version} inside build/`);
 }

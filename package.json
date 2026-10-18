@@ -19,9 +19,9 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "build": "rm -rf build && tsc -p tsconfig.build.json && node -e \"const fs=require('fs'); ['.env.example','.gitignore','README.md','LICENSE.md','assistant','webpack.mix.js','app.ts','tsconfig.json','tsconfig.build.json'].forEach(f=>{if(fs.existsSync(f))fs.copyFileSync(f,'build/'+f)}); ['public','resources','storage','app','bootstrap','config','database','routes'].forEach(d=>{if(fs.existsSync(d))fs.cpSync(d,'build/'+d,{recursive:true})});\" && npm run prepare-package",
+    "build": "rm -rf build && tsc -p tsconfig.build.json && npm run prepare-package",
     "build:clean": "rm -rf build && npm run build",
-    "server:start": "ts-node app.ts",
+    "server:start": "ts-node src/app.ts",
     "prepare-package": "node scripts/prepare-package.js",
     "clean": "rm -rf build coverage"
   },
@@ -50,26 +50,9 @@
     "url": "https://github.com/ostrojs/ostro/issues"
   },
   "homepage": "https://github.com/ostrojs/ostro#readme",
-  "main": "app.ts",
-  "types": "app.ts",
+  "main": "src/app.ts",
+  "types": "src/app.ts",
   "files": [
-    "app",
-    "bootstrap",
-    "config",
-    "database",
-    "public",
-    "resources",
-    "routes",
-    "storage",
-    "build",
-    "app.ts",
-    "assistant",
-    ".env.example",
-    "webpack.mix.js",
-    "tsconfig.json",
-    "tsconfig.build.json",
-    ".gitignore",
-    "README.md",
-    "LICENSE.md"
+    "build"
   ]
 }
